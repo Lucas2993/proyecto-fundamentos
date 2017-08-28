@@ -1,0 +1,19 @@
+{
+  "name": "proyecto-fundamentos",
+  "version": "1.0.0",
+  "description": "Proyecto Final de Fundamentos Teoricos",
+  "main": "run.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LucasAbella29/proyecto-fundamentos.git"
+  },
+  "author": "Abella Lucas Gabriel, Balcazar Carlos Emanuel",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LucasAbella29/proyecto-fundamentos/issues"
+  },
+  "homepage": "https://github.com/LucasAbella29/proyecto-fundamentos#readme"
+}
