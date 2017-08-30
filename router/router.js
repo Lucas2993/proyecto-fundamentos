@@ -2,8 +2,10 @@
 var express = require('express');
 var router = express.Router();
 
-// Ruta principal de la aplicacion.
-router.get('/hola', function(req, res) {
+/**
+ * Informacion del estado del servidor, solo es una ruta de testeo.
+ */
+router.get('/info', function(req, res) {
     res.send('aplicacion inicializada');
 });
 
