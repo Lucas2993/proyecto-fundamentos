@@ -1,0 +1,30 @@
+{
+    "nodes": [
+        {
+            "id": 1,
+            "label": "Fundamentos"
+        },
+        {
+            "id": 2,
+            "label": "Teoricos"
+        },
+        {
+            "id": 3,
+            "label": "Informatica"
+        }
+    ],
+    "edges": [
+        {
+            "id": 1,
+            "label": "",
+            "from": 1,
+            "to": 2
+        },
+        {
+            "id": 2,
+            "label": "de la",
+            "from": 2,
+            "to": 3
+        }
+    ]
+}
