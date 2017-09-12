@@ -54,7 +54,7 @@
 
                     dlg.result.then(
                         function(newNode) {
-                            callback(false, newNode);
+                            callback(newNode);
                         }, function() {
                             // void again
                         }
