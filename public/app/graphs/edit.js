@@ -3,12 +3,12 @@
 
     var controllerName = 'editGraph';
 
-    angular.module('app').controller(controllerName, ['$scope', 'graphService', editGraph]);
+    angular.module('app').controller(controllerName, ['$scope', 'dialogs', 'graphService', editGraph]);
 
     /**
      * Controlador de la pantalla de edicion de grafo.
      */
-    function editGraph($scope, graphSrv) {
+    function editGraph($scope, dialogs, graphSrv) {
 
         /**
          * Obtiene un grafo en formato JSON y lo agrega como dato al network.
@@ -48,7 +48,20 @@
                 navigationButtons: true,
                 hover: true
             },
-            manipulation: true
+            manipulation: {
+                addNode: function(node, callback) {
+                    var dlg = dialogs.create('/app/dialogs/nodeDlg.html','nodeDlgCtrl', node, 'lg');
+
+                    dlg.result.then(
+                        function(newNode) {
+                            callback(false, newNode);
+                        }, function() {
+                            // void again
+                        }
+                    );
+
+                }
+            }
         };
 
     } // fin controlador.

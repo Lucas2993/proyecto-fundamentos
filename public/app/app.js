@@ -5,7 +5,8 @@
 	var app = angular.module('app', [
 	   'ngAnimate',        // animaciones
 	   'ngRoute',          // ruteo
-	   'ui.bootstrap',      // ui-bootstrap (ej: carousel, pagination, dialog)
+	   'ui.bootstrap', 
+	   'dialogs.main'
    	]);
 
     app.run(['$rootScope', '$route',  function ($rootScope, $route) {
