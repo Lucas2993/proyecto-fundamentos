@@ -5,18 +5,23 @@
 
     angular.module('app').controller(controllerId, ['$scope','$uibModalInstance','data', nodeDlgCtrl]);
 
+    /**
+     * Controlador del dialog de nodos.
+     */
     function nodeDlgCtrl($scope, $modalInstance, data) {
+
+        $scope.node = data;
 
         // Cierra la ventana del modal.
         $scope.close = function() {
             $modalInstance.dismiss('Canceled');
         };
 
+        // Cierra el modal devolviendo los datos utilizados.
         $scope.save = function() {
-            data.label = "Cambiado desde el modal";
-            $modalInstance.close(data);
+            $modalInstance.close($scope.node);
         }
 
-    } // end viewPostCtrl
+    } // end nodeDlg
 
 })();
