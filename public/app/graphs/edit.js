@@ -3,12 +3,12 @@
 
     var controllerName = 'editGraph';
 
-    angular.module('app').controller(controllerName, ['$scope', 'dialogs', 'graphService', editGraph]);
+    angular.module('app').controller(controllerName, ['$scope', 'dialogs', 'toastr', 'graphService', editGraph]);
 
     /**
      * Controlador de la pantalla de edicion de grafo.
      */
-    function editGraph($scope, dialogs, graphSrv) {
+    function editGraph($scope, dialogs, logger, graphSrv) {
 
         /**
          * Obtiene un grafo en formato JSON y lo agrega como dato al network.
@@ -21,7 +21,8 @@
         }
 
         getJson();
-
+        logger.info('Activado', 'Editor');
+        
         /**
          * Datos a mostrar del grafo.
          * @type {Object}
@@ -44,6 +45,13 @@
                     var edge = $scope.networkData.edges._data[properties.edges[0]];
                     console.log('edge: ', JSON.stringify(edge));   
                 }
+            },
+            doubleClick: function(properties) {
+                if (properties.nodes.length > 0) {
+                    var node = $scope.networkData.nodes._data[properties.nodes[0]];
+                    node.color = {background: '#32CD32'};
+                    $scope.networkData.nodes.update(node);
+                }
             }
         };
 
@@ -58,11 +66,14 @@
                 }
             },
             nodes: {
-               physics: true
+               physics: true,
+               color: {
+                   background: 'cyan'
+               }
             },
             interaction: {
                 navigationButtons: true,
-                hover: true
+                hoverConnectedEdges: false
             },
             manipulation: {
                 addNode: function(node, callback) {
@@ -93,6 +104,7 @@
             
             dlg.result.then(
                 function(newNode) {
+                    logger.success('Guardado');
                     callback(newNode);
                 }, function() {
                     callback(null);
@@ -115,6 +127,7 @@
                 function(newEdge) {
                     newEdge.from = newEdge.from.id || newEdge.from;
                     newEdge.to = newEdge.to.id || newEdge.to;
+                    logger.success('Guardado');                    
                     callback(newEdge);
                 }, function() {
                     callback(null);

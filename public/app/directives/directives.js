@@ -40,6 +40,7 @@
                 $scope.$watchCollection('options', function(options) {
                     if (network != null) {
                         network.setOptions(options);
+                        network.redraw();
                     }
                 });
 
