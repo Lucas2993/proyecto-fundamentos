@@ -39,7 +39,10 @@
             click: function(properties) {
                 if (properties.nodes.length > 0) {
                     var node = $scope.networkData.nodes._data[properties.nodes[0]];
-                    console.log(JSON.stringify(node));                    
+                    console.log('node: ', JSON.stringify(node));                    
+                } else {
+                    var edge = $scope.networkData.edges._data[properties.edges[0]];
+                    console.log('edge: ', JSON.stringify(edge));   
                 }
             }
         };
@@ -92,7 +95,7 @@
                 function(newNode) {
                     callback(newNode);
                 }, function() {
-                    // void again
+                    callback(null);
                 }
             );
         }
@@ -103,15 +106,37 @@
          * @param {Function} callback 
          */
         function showEdgeModal(edge, callback) {
-            var dlg = dialogs.create('/app/dialogs/edgeDlg.html','edgeDlgCtrl', edge, {size: 'md'});
+            var inputs = getEdgeInputs();
+            var data = {edge: edge, inputs: inputs};
+
+            var dlg = dialogs.create('/app/dialogs/edgeDlg.html','edgeDlgCtrl', data, {size: 'md'});
             
             dlg.result.then(
                 function(newEdge) {
+                    newEdge.from = newEdge.from.id;
+                    newEdge.to = newEdge.to.id;
                     callback(newEdge);
                 }, function() {
-                    // void again
+                    callback(null);
                 }
             );
+        }
+
+        /**
+         * Obtiene las entradas definidas en las relaciones.
+         * @return {Array} todas las entradas posibles.
+         */
+        function getEdgeInputs() {
+            var inputs = [];
+            var edges = Object.values($scope.networkData.edges._data);
+            
+            for (var i = 0; i < edges.length; i++) {
+                if ((inputs.indexOf(edges[i].label) < 1) && (edges[i].label != "")) {
+                    inputs.push(edges[i].label);
+                }
+            }
+
+            return inputs;
         }
 
     } // fin controlador.

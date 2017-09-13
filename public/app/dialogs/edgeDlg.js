@@ -10,7 +10,8 @@
      */
     function edgeDlgCtrl($scope, $modalInstance, data) {
 
-        $scope.edge = data;
+        $scope.edge = data.edge;
+        $scope.inputs = data.inputs;
 
         // Cierra la ventana del modal.
         $scope.close = function() {

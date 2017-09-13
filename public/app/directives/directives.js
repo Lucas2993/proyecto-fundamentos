@@ -25,7 +25,9 @@
 
                     // Creo el objeto que contiene los datos y opciones de manipulacion de grafos.
                     network = new vis.Network($element[0], $scope.data, $scope.options);
-
+                    network.redraw();
+                    network.editEdgeMode();
+                    
                     // Registro los posibles eventos en el network para su ejecucion.
                     angular.forEach($scope.events, function(callback, event) {
                         if (events.indexOf(event) >= 0) {
