@@ -113,8 +113,8 @@
             
             dlg.result.then(
                 function(newEdge) {
-                    newEdge.from = newEdge.from.id;
-                    newEdge.to = newEdge.to.id;
+                    newEdge.from = newEdge.from.id || newEdge.from;
+                    newEdge.to = newEdge.to.id || newEdge.to;
                     callback(newEdge);
                 }, function() {
                     callback(null);
@@ -131,7 +131,7 @@
             var edges = Object.values($scope.networkData.edges._data);
             
             for (var i = 0; i < edges.length; i++) {
-                if ((inputs.indexOf(edges[i].label) < 1) && (edges[i].label != "")) {
+                if ((inputs.indexOf(edges[i].label) < 0) && (edges[i].label != "")) {
                     inputs.push(edges[i].label);
                 }
             }
