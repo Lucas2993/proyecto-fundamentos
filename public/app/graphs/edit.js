@@ -90,6 +90,26 @@
                     editWithoutDrag: function(edge, callback) {
                         showEdgeModal(edge, callback);
                     }
+                },
+                deleteNode: function(node, callback) {
+                    var dlg = dialogs.confirm('¿Está seguro de que desea eliminar el nodo?', 'Confirmación requerida', {size: 'md'});
+
+                    dlg.result.then(function() {
+                        logger.success('Eliminado');
+                        callback(node);
+                    }, function() {
+                        callback(null);
+                    });
+                },
+                deleteEdge: function(edge, callback) {
+                    var dlg = dialogs.confirm('¿Está seguro de que desea eliminar la relación?', 'Confirmación requerida', {size: 'md'});
+                    
+                    dlg.result.then(function() {
+                        logger.success('Eliminado');
+                        callback(edge);
+                    }, function() {
+                        callback(null);
+                    });
                 }
             }
         };
