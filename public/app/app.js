@@ -31,6 +31,6 @@
 		  	preventOpenDuplicates: false,
 		  	target: 'body'
 		});
-	  });
+	});
 
 })();
