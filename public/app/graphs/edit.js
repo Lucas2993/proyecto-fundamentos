@@ -68,6 +68,7 @@
             nodes: {
                physics: true
             },
+            locale: 'es',            
             interaction: {
                 navigationButtons: true,
                 hoverConnectedEdges: false
