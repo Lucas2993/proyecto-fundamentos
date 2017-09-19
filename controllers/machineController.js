@@ -19,7 +19,7 @@ exports.findAll = function(callback) {
  * Busca un automata por ID.
  */
 exports.findById = function(id, callback) {
-	Machine.findById('59c1406edeebc822b8481c4e', function(error, found) {
+	Machine.findById(id, function(error, found) {
 		if (error)
 			return callback(error);
 
