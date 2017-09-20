@@ -37,6 +37,30 @@ exports.save = function(params, callback) {
 		if (error)
 			return callback(error);
 
-		return callback(false, 'Guardado con exito');
+		return callback(false, machine);
+	});
+};
+
+/**
+ * Actualiza un automata en la base de datos.
+ */
+exports.update = function(id, machine, callback) {
+	Machine.findByIdAndUpdate(id, machine, {new: true}, function(error, model) {
+		if (error)
+			return callback(error);
+		
+		return callback(false, model);
+	});
+};
+
+/**
+ * Elimina un automata.
+ */
+exports.delete = function(id, callback) {
+	Machine.remove({_id: id}, function(error) {
+		if (error)
+			return callback(error);
+		
+		return callback(false, true);
 	});
 };

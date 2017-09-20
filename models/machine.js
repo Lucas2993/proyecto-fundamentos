@@ -7,7 +7,8 @@ var mongoose = require('mongoose');
 var schema = mongoose.Schema({ 
     name: String,
     description: String,
-    graph: String 
+    nodes: Array,
+    edges: Array
 });
 
 var Machine = mongoose.model('machine', schema);

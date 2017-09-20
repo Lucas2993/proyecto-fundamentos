@@ -34,11 +34,45 @@ router.get('/api/machines', function(req, res) {
 /**
  * Retorna un automata buscado por su ID.
  */
-router.get('/api/machines/:id', function(req, res) {
+router.get('/api/machine/:id', function(req, res) {
     var id = req.params.id;
 
     machineCtrl.findById(id, function(error, result) {
         defaultCallback(res, error, result);        
+    });
+});
+
+/**
+ * Actualiza un automata por su ID.
+ */
+router.post('/api/machine/:id', function(req, res) {
+    var id = req.params.id;
+    var machine = req.body;
+
+    machineCtrl.update(id, {name: 'nuevo actualizado'}, function(error, result) {
+        defaultCallback(res, error, result);
+    });
+});
+
+/**
+ * Elimina un automata por su ID.
+ */
+router.delete('/api/machine/:id', function(req, res) {
+    var id = req.params.id;
+
+    machineCtrl.delete(id, function(error, result) {
+        defaultCallback(res, error, result);
+    });
+});
+
+/**
+ * Persiste un nuevo automata.  
+ */
+router.post('/api/machine', function(req, res) {
+    var machine = req.body.data;
+    
+    machineCtrl.save(machine, function(error, result) {
+        defaultCallback(res, error, result);
     });
 });
 

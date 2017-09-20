@@ -12,10 +12,11 @@ var bodyParser = require('body-parser');
 var app = express();
 
 // configure all environments.
-app.get(index);
-app.use(router);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
+
+app.get(index);
+app.use(router);
 
 // static files.
 app.use(express.static(path.join(__dirname, 'public')));
