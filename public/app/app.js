@@ -7,7 +7,9 @@
 	   	'ngRoute',          // ruteo
 	   	'dialogs.main',
 	   	'ui.bootstrap',      // ui-bootstrap (ex: carousel, pagination, dialog)
-		'toastr'
+		'toastr',
+
+		'navigationBar'
 	]);
 
     app.run(['$rootScope', '$route',  function ($rootScope, $route) {

@@ -17,17 +17,42 @@
             $routeProvider.when(r.url, r.config);
         });
 
-        $routeProvider.otherwise({ redirectTo: '/' });
+        $routeProvider.otherwise({ redirectTo: '/home' });
     }
 
 	//	Define las rutas disponibles de la aplicacion.
   	function getRoutes() {
 		return [
 			{
-				url: '/',
+				url: '/machine/edit/:id',
 				config: {
-					title: 'Editar Grafo',
-					templateUrl: 'app/graphs/edit.html'
+					title: 'Editar maquina',
+					templateUrl: 'app/graphs/graph.edit.view.html',
+					controller: 'editGraph'
+				}
+			},
+			{
+				url: '/machine/simulate/:id',
+				config: {
+					title: 'Simular maquina',
+					templateUrl: 'app/graphs/edit.html',
+					controller: 'simulateGraph'
+				}
+			},
+			{
+				url: '/home',
+				config: {
+					title: 'Inicio',
+					templateUrl: 'app/home/home.view.html',
+					controller: 'homeController'
+				}
+			},
+			{
+				url: '/machines',
+				config: {
+					title: 'Maquinas de estados',
+					templateUrl: 'app/machines/machines.list.view.html',
+					controller: 'machinesListController'
 				}
 			}
 	  	];

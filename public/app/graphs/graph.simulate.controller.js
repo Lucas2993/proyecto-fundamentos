@@ -1,24 +1,33 @@
 (function() {
     'use strict';
 
-    var controllerName = 'editGraph';
+    var controllerName = 'simulateGraph';
 
-    angular.module('app').controller(controllerName, ['$scope', 'dialogs', 'toastr', 'graphService', 'utils', editGraph]);
+    angular.module('app').controller(controllerName, ['$scope', 'dialogs', 'toastr', 'graphService', 'utils', '$routeParams', simulateGraph]);
 
     /**
      * Controlador de la pantalla de edicion de grafo.
      */
-    function editGraph($scope, dialogs, logger, graphSrv, utils) {
+    function simulateGraph($scope, dialogs, logger, graphSrv, utils, params) {
 
         /**
          * Obtiene un grafo en formato JSON y lo agrega como dato al network.
          */
         function getJson() {
             graphSrv.getJson().then(function(result) {
-                $scope.networkData.nodes.add(result.nodes);
-                $scope.networkData.edges.add(result.edges);
+                $scope.networkData.nodes.add(result.response.nodes);
+                $scope.networkData.edges.add(result.response.edges);
             });
         }
+
+        $scope.new = false;
+        $scope.edit = false;
+
+        console.log("El id obtenido es: "+params.id);
+        if(params.id === 'new'){
+            $scope.new = true;
+        }
+        $scope.edit = true;
 
         getJson();
         logger.success('Activado', 'Editor');
@@ -46,12 +55,6 @@
                     var edge = $scope.networkData.edges._data[properties.edges[0]];
                     console.log('edge: ', JSON.stringify(edge));   
                 }
-            },
-            doubleClick: function(properties) {
-                if (properties.nodes.length > 0) {
-                    changeNodeColor(properties.nodes[0], 'start');
-                    logger.info('Nodo seleccionado como inicial');
-                }
             }
         };
 
@@ -73,43 +76,7 @@
                 navigationButtons: true,
                 hoverConnectedEdges: false
             },
-            manipulation: {
-                addNode: function(node, callback) {
-                    node.label = "";
-                    showNodeModal(node, callback);
-                },
-                editNode: function(node, callback) {
-                    showNodeModal(node, callback);                    
-                },
-                addEdge: function(edge, callback) {
-                    showEdgeModal(edge, callback);
-                },
-                editEdge: {
-                    editWithoutDrag: function(edge, callback) {
-                        showEdgeModal(edge, callback);
-                    }
-                },
-                deleteNode: function(node, callback) {
-                    var dlg = dialogs.confirm('¿Está seguro de que desea eliminar el nodo?', 'Eliminara ademas las relaciones entrantes y salientes', {size: 'md'});
-
-                    dlg.result.then(function() {
-                        logger.success('Nodo eliminado');
-                        callback(node);
-                    }, function() {
-                        callback(null);
-                    });
-                },
-                deleteEdge: function(edge, callback) {
-                    var dlg = dialogs.confirm('¿Está seguro de que desea eliminar la relación?', 'Confirmación requerida', {size: 'md'});
-                    
-                    dlg.result.then(function() {
-                        logger.success('Relación eliminada');
-                        callback(edge);
-                    }, function() {
-                        callback(null);
-                    });
-                }
-            }
+            manipulation: {}
         };
 
         /**
@@ -170,26 +137,6 @@
             }
 
             return inputs;
-        }
-
-        /**
-         * Cambia el color de un nodo siendo el unico con un color diferente.
-         * Los demas nodos son pintados del color por defecto.
-         * @param {String} id 
-         * @param {String} color 
-         */
-        function changeNodeColor(id, color) {
-            var allNodes = utils.objectToArray($scope.networkData.nodes._data);
-
-            for (var i = 0; i < allNodes.length; i++) {
-                allNodes[i].color = utils.getColor('default');
-            }
-
-            var node = $scope.networkData.nodes._data[id];
-            node.color = utils.getColor(color);
-            
-            $scope.networkData.nodes.update(allNodes);            
-            $scope.networkData.nodes.update(node);
         }
 
     } // fin controlador.

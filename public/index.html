@@ -38,11 +38,18 @@
     <script src="app/directives/directives.js"></script>
 
     <!-- App controllers -->
-    <script src="app/graphs/edit.js"></script>
+    <script src="app/graphs/graph.edit.controller.js"></script>
+    <script src="app/graphs/graph.simulate.controller.js"></script>
+    <script src="app/home/home.controller.js"></script>
+    <script src="app/machines/machines.list.controller.js"></script>
+
+    <!-- App components -->
+    <script src="app/navigation/navigation.component.js"></script>
 
     <!-- App services -->
     <script src="app/services/graphService.js"></script>
-    <script src="app/services/utils.js"></script>    
+    <script src="app/services/utils.js"></script>  
+    <script src="app/machines/machines.service.js"></script>    
 
     <!-- Dialogs -->
     <script src="app/dialogs/nodeDlg.js"></script>
@@ -51,6 +58,7 @@
 
 </head>
 <body>
+    <navigation></navigation>
     <div class="col-md-12" ng-view=""></div>
 </body>
 </html>
