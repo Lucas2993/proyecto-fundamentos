@@ -48,8 +48,8 @@ router.get('/api/machine/:id', function(req, res) {
 router.post('/api/machine/:id', function(req, res) {
     var id = req.params.id;
     var machine = req.body;
-
-    machineCtrl.update(id, {name: 'nuevo actualizado'}, function(error, result) {
+    
+    machineCtrl.update(id, machine, function(error, result) {
         defaultCallback(res, error, result);
     });
 });

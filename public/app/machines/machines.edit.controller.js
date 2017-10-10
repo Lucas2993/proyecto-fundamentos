@@ -3,34 +3,34 @@
 
     var controllerName = 'machinesEditController';
 
-    angular.module('app').controller(controllerName, ['$scope', 'dialogs', 'toastr', 'machinesService', 'utils', '$routeParams', '$window', machinesEditController]);
+    angular.module('app').controller(controllerName, ['$scope', 'dialogs', 'toastr', 'machinesService', 'utils', '$routeParams', '$window', '$location', machinesEditController]);
 
     /**
      * Controlador de la pantalla de edicion de automatas. 
      */
-    function machinesEditController($scope, dialogs, logger, machineSrv, utils, $routeParams, $window) {
+    function machinesEditController($scope, dialogs, logger, machineSrv, utils, $routeParams, $window, $location) {
 
-        /**
-        * Obtiene un grafo en formato JSON y lo agrega como dato al network.
-        */
-        function getJson() {
-            machineSrv.getJson().then(function(result) {
-                $scope.name = result.response.name || "";
-                $scope.networkData.nodes.add(result.response.nodes);
-                $scope.networkData.edges.add(result.response.edges);
+        // Busca un automata por su ID y lo renderiza en la pantalla.
+        function findById(id) {
+            machineSrv.findById(id).then(function(result) {
+                if (result.error) {
+                    logger.error('No existe el automata con el id recibido', 'ID no encontrado');
+                    return $location.path('machines');
+                }
+
+                $scope.machine = result.response;
+                $scope.networkData.nodes.add($scope.machine.nodes);
+                $scope.networkData.edges.add($scope.machine.edges);
             });
         }
 
-        $scope.new = false;
-        $scope.edit = false;
+        // bandera que indica si el automata es nuevo.
+        $scope.machine = {_id: false, name:"", nodes: [], edges: []};
 
-        console.log("El id obtenido es: " + $routeParams.id);
-
-        if ($routeParams.id === 'new') {
-            $scope.new = true;
+        if ($routeParams.id != "new") {
+            findById($routeParams.id);
         }
 
-        getJson();
         logger.success('Activado', 'Editor');
 
         // Redirecciona a la ultima pagina visitada.
@@ -43,8 +43,37 @@
             if ($scope.name == "") 
                 return logger.error('Ingrese un nombre para el automata', 'Error');
             
-            
+            if ($scope.machine._id) update(); else save();
         };
+
+        // envia a persistir un nuevo automata.
+        function save() {
+            var nodes = utils.objectToArray($scope.networkData.nodes._data);
+            var edges = utils.objectToArray($scope.networkData.edges._data);
+            var machine = { name: $scope.machine.name, nodes: nodes, edges: edges};
+            
+            machineSrv.save(machine).then(function(result) {
+                if (result.error)
+                    return logger.error('No se pudo persistir el automata', 'Error');
+
+                logger.success('Automata guardado con exito');
+            });
+        }
+
+        // envia a actualizar un nuevo automata.
+        function update() {
+            var nodes = utils.objectToArray($scope.networkData.nodes._data);
+            var edges = utils.objectToArray($scope.networkData.edges._data);
+            var machine = {_id: $scope.machine._id, name: $scope.machine.name, nodes: nodes, edges: edges };
+
+            machineSrv.update($scope.machine._id, machine).then(function (result) {
+                if (result.error)
+                    return logger.error('No se pudo actualizar el automata', 'Error');
+
+                findById(result.response._id);
+                logger.success('Automata actualizado con exito');
+            });
+        }
 
         /**
          * Datos a mostrar del grafo.

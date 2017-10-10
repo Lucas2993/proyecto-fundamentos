@@ -45,7 +45,7 @@ exports.save = function(params, callback) {
  * Actualiza un automata en la base de datos.
  */
 exports.update = function(id, machine, callback) {
-	Machine.findByIdAndUpdate(id, machine, { new: true }, function(error, model) {
+	Machine.findByIdAndUpdate(id, machine, { new: false }, function(error, model) {
 		if (error)
 			return callback(error);
 

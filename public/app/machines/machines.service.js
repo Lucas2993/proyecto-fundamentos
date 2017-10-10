@@ -9,7 +9,11 @@
 
             var service = {
                 findAll: findAll,
-                getJson: getJson
+                getJson: getJson,
+                findById: findById,
+                save: save,
+                update: update,
+                destroy: destroy
             }
 
             return service;
@@ -23,7 +27,7 @@
                     return response.data;
                 },
                 function error(error) {
-                    return error;
+                    return error.data;
                 });
             }
 
@@ -38,6 +42,50 @@
                     },
                     function error(error) {
                         return error;
+                    });
+            }
+
+            /**
+             * Busca un automata por su ID.
+             * @param {Number} id 
+             */
+            function findById(id) {
+                return $http.get('api/machine/' + id).then(
+                    function success(response) {
+                        return response.data;
+                    },
+                    function error(error) {
+                        return error.data;
+                    });
+            }
+
+            function save(machine) {
+                return $http.post('api/machine/', {data: machine}).then(
+                    function success(response) {
+                        return response.data;
+                    },
+                    function error(error) {
+                        return error.data;
+                    });
+            }
+
+            function update(id, machine) {
+                return $http.post('api/machine/' + id, machine).then(
+                    function success(response) {
+                        return response.data;
+                    },
+                    function error(error) {
+                        return error.data;
+                    });
+            }
+
+            function destroy(id) {
+                return $http.delete('api/machine/' + id).then(
+                    function success(response) {
+                        return response.data;
+                    },
+                    function error(error) {
+                        return error.data;
                     });
             }
 
