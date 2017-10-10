@@ -1,0 +1,26 @@
+<div class="row">
+    <!-- Canvas -->
+    <div style="width: 80%; height: 80%" class="col-md-10 col-md-offset-0">
+
+        <vis-network style="width: 100%; height: 100%" data="networkData" options="networkOptions" events="networkEvents" id="mynetwork">
+        </vis-network>
+    </div>
+
+    <div>
+        <label>Nombre del automata:</label>
+        <br>
+        <input type="text" name="name" data-ng-model="name" placeholder=" nombre del automata">
+        <br>
+        <br>
+
+        <button class="btn btn-sm btn-primary" title="Guardar automata" data-ng-click="save()">
+            <i class="glyphicon glyphicon-floppy-disk"></i>&nbsp;Guardar
+        </button>
+
+        <button class="btn btn-sm btn-success" title="Guardar automata">
+            <i class="glyphicon glyphicon-play"></i>&nbsp;Simular
+        </button>
+
+    </div>
+
+</div>

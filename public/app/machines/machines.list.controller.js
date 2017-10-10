@@ -1,32 +1,23 @@
-(function() {
-    'use strict';
+(function () {
+  'use strict';
 
-    var controllerName = 'machinesListController';
+	var controllerName = 'machinesListController';
 
-    angular.module('app').controller(controllerName, ['$scope', 'machinesService', machinesListController]);
+	angular.module('app').controller(controllerName, ['$scope', '$location', 'machinesService', machinesListController]);
 
-    /**
-     * Controlador de la pantalla principal.
-     */
-    function machinesListController($scope, machinesSrv) {
+	/**
+	 * Controlador de la pantalla principal.
+	 */
+	function machinesListController($scope, $location, machinesSrv) {
 
-      machinesSrv.findAll().then(function(results){
-        $scope.machines = results.response;
-      });
+		machinesSrv.findAll().then(function (results) {
+			$scope.machines = results.response;
+		});
 
-      // $scope.machines = [
-      //   {
-      //     id: 1,
-      //     name: 'Maquina 1',
-      //     description : 'Descripcion de la maquina 1'
-      //   },
-      //   {
-      //     id: 2,
-      //     name: 'Maquina 2',
-      //     description : 'Descripcion de la maquina 2'
-      //   }
-      // ];
+		$scope.edit = function(machine) {
+			$location.path('/machine/edit/' + machine._id);
+		};
 
-    } // fin controlador.
+	} // fin controlador.
 
 })();

@@ -15,8 +15,11 @@
 
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav">
-				<li ng-class="{'active':selectedTab === 'home'}" ng-click="selectedTab = 'home'"><a href="#/home">Inicio<span class="sr-only">(current)</span></a></li>
-				<li ng-class="{'active':selectedTab === 'machines'}" ng-click="selectedTab = 'machines'"><a href="#/machines">Maquinas</a></li>
+				<li ng-class="{'active':selectedTab === 'home'}" ng-click="selectedTab = 'home'"><a href="#/home">
+					<span class="glyphicon glyphicon-home" aria-hidden="true"></span> Inicio</a></li>
+
+				<li ng-class="{'active':selectedTab === 'machines'}" ng-click="selectedTab = 'machines'"><a href="#/machines">
+					<span class="glyphicon glyphicon-cog" aria-hidden="true"></span> Maquinas</a></li>
 			</ul>
 		</div>
 	</div>

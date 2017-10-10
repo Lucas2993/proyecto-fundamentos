@@ -27,8 +27,8 @@
 				url: '/machine/edit/:id',
 				config: {
 					title: 'Editar maquina',
-					templateUrl: 'app/graphs/graph.edit.view.html',
-					controller: 'editGraph'
+					templateUrl: 'app/machines/machines.edit.view.html',
+					controller: 'machinesEditController'
 				}
 			},
 			{

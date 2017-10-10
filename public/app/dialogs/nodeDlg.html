@@ -5,17 +5,17 @@
 <div class="modal-body">
     <div class="form-group">
         <label class="control-label" for="course">Nombre:</label>
-        <input type="text" ng-model="node.label" placeholder="Ingrese el estado que representa" class="form-control">
+        <input type="text" name="name" on-enter="input[name='description']" ng-model="node.label" placeholder="Ingrese el estado que representa" class="form-control">
     </div>
 
     <div class="form-group">
         <label class="control-label" for="course">Descripción:</label>
-        <input type="text" ng-model="node.description" placeholder="Descripcion del nodo (Opcional)" class="form-control">
+        <input type="text" name="description" on-enter="input[name='save']" ng-model="node.description" placeholder="Descripcion del nodo (Opcional)" class="form-control">
     </div>
 
 </div>
 
 <div class="modal-footer">
-    <button type="button" class="btn btn-primary" ng-click="save()">Guardar</button>    
+    <button name="save" type="submit" class="btn btn-primary" ng-click="save()">Guardar</button>    
     <button type="button" class="btn btn-primary" ng-click="close()">Cerrar</button>
 </div>

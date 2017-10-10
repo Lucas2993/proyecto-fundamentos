@@ -11,7 +11,7 @@ var router = express.Router();
  * Informacion del estado del servidor, util como ruta de testeo.
  */
 router.get('/info', function(req, res) {
-    var info = {version: "1.5", fecha: "septiembre 2017"};
+    var info = {version: "1.5", fecha: "october 2017"};
     defaultCallback(res, null, info);    
 });
 
