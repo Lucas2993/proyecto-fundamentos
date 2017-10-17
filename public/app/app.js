@@ -3,35 +3,35 @@
 	'use strict';
 
 	var app = angular.module('app', [
-	   	'ngAnimate',        // animaciones
-	   	'ngRoute',          // ruteo
-	   	'dialogs.main',
-	   	'ui.bootstrap',      // ui-bootstrap (ex: carousel, pagination, dialog)
+		'ngAnimate',        // animaciones
+		'ngRoute',          // ruteo
+		'dialogs.main',
+		'ui.bootstrap',      // ui-bootstrap (ex: carousel, pagination, dialog)
 		'toastr',
-
+		'ngCookies',
 		'navigationBar'
 	]);
 
-    app.run(['$rootScope', '$route',  function ($rootScope, $route) {
-    	$rootScope.title = "Fundamentos Teoricos de la Informatica";
-    }]);
+	app.run(['$rootScope', '$route', function ($rootScope, $route) {
+		$rootScope.title = "Fundamentos Teoricos de la Informatica";
+	}]);
 
 	// configuracion del locationProvider
-	app.config(['$locationProvider', function($locationProvider) {
-        $locationProvider.hashPrefix('');
+	app.config(['$locationProvider', function ($locationProvider) {
+		$locationProvider.hashPrefix('');
 	}]);
-	
+
 	// configuracion del toastr
-	app.config(function(toastrConfig) {
+	app.config(function (toastrConfig) {
 		angular.extend(toastrConfig, {
 			autoDismiss: false,
-		  	containerId: 'toast-container',
-		  	maxOpened: 0,    
-		  	newestOnTop: true,
-		  	positionClass: 'toast-bottom-right',
-		  	preventDuplicates: false,
-		  	preventOpenDuplicates: false,
-		  	target: 'body'
+			containerId: 'toast-container',
+			maxOpened: 0,
+			newestOnTop: true,
+			positionClass: 'toast-bottom-right',
+			preventDuplicates: false,
+			preventOpenDuplicates: false,
+			target: 'body'
 		});
 	});
 

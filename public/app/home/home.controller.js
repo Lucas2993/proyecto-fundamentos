@@ -1,14 +1,14 @@
 (function() {
     'use strict';
 
-    var controllerName = 'homeController';
+    var controllerName = 'homeCtrl';
 
-    angular.module('app').controller(controllerName, ['$scope', homeController]);
+    angular.module('app').controller(controllerName, ['$scope', homeCtrl]);
 
     /**
      * Controlador de la pantalla principal.
      */
-    function homeController($scope) {
+    function homeCtrl($scope) {
 
         $scope.myInterval = 5000;
         $scope.noWrapSlides = false;

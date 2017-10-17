@@ -1,14 +1,14 @@
 (function () {
     'use strict';
 
-    var controllerName = 'machinesEditController';
+    var controllerName = 'machinesEditCtrl';
 
-    angular.module('app').controller(controllerName, ['$scope', 'dialogs', 'toastr', 'machinesService', 'utils', '$routeParams', '$window', '$location', machinesEditController]);
+    angular.module('app').controller(controllerName, ['$scope', 'dialogs', 'toastr', 'machinesSrv', 'utils', '$routeParams', '$window', '$location', machinesEditCtrl]);
 
     /**
      * Controlador de la pantalla de edicion de automatas. 
      */
-    function machinesEditController($scope, dialogs, logger, machineSrv, utils, $routeParams, $window, $location) {
+    function machinesEditCtrl($scope, dialogs, logger, machineSrv, utils, $routeParams, $window, $location) {
 
         // Busca un automata por su ID y lo renderiza en la pantalla.
         function findById(id) {
@@ -25,13 +25,13 @@
         }
 
         // bandera que indica si el automata es nuevo.
-        $scope.machine = {_id: false, name:"", nodes: [], edges: []};
+        $scope.machine = {_id: false, name: "", nodes: [], edges: [], description: ""};
 
         if ($routeParams.id != "new") {
             findById($routeParams.id);
         }
 
-        logger.success('Activado', 'Editor');
+        logger.success('Editor Activado');
 
         // Redirecciona a la ultima pagina visitada.
         $scope.back = function () {
@@ -48,30 +48,39 @@
 
         // envia a persistir un nuevo automata.
         function save() {
+            if ($scope.machine.name == "") {
+                return logger.error('Ingrese un nombre para el automata');
+            }
+
             var nodes = utils.objectToArray($scope.networkData.nodes._data);
             var edges = utils.objectToArray($scope.networkData.edges._data);
-            var machine = { name: $scope.machine.name, nodes: nodes, edges: edges};
+            var machine = { name: $scope.machine.name, description: $scope.machine.description, nodes: nodes, edges: edges };
             
             machineSrv.save(machine).then(function(result) {
                 if (result.error)
                     return logger.error('No se pudo persistir el automata', 'Error');
 
-                logger.success('Automata guardado con exito');
+                logger.success('Automata guardado');
             });
         }
 
         // envia a actualizar un nuevo automata.
         function update() {
+            
+            if ($scope.machine.name == "") {
+                return logger.error('Ingrese un nombre para el automata');
+            }
+
             var nodes = utils.objectToArray($scope.networkData.nodes._data);
             var edges = utils.objectToArray($scope.networkData.edges._data);
-            var machine = {_id: $scope.machine._id, name: $scope.machine.name, nodes: nodes, edges: edges };
+            var machine = { name: $scope.machine.name, description: $scope.machine.description, nodes: nodes, edges: edges};
 
             machineSrv.update($scope.machine._id, machine).then(function (result) {
                 if (result.error)
                     return logger.error('No se pudo actualizar el automata', 'Error');
 
                 findById(result.response._id);
-                logger.success('Automata actualizado con exito');
+                logger.success('Automata actualizado');
             });
         }
 
@@ -148,7 +157,7 @@
                 deleteEdge: function (edge, callback) {
                     var dlg = dialogs.confirm('¿Está seguro de que desea eliminar la relación?', 'Confirmación requerida', { size: 'md' });
 
-                    dlg.result.then(function () {
+                    dlg.result.then(function() {
                         logger.success('Relación eliminada');
                         callback(edge);
                     }, function () {

@@ -24,27 +24,11 @@
   	function getRoutes() {
 		return [
 			{
-				url: '/machine/edit/:id',
-				config: {
-					title: 'Editar maquina',
-					templateUrl: 'app/machines/machines.edit.view.html',
-					controller: 'machinesEditController'
-				}
-			},
-			{
-				url: '/machine/simulate/:id',
-				config: {
-					title: 'Simular maquina',
-					templateUrl: 'app/graphs/edit.html',
-					controller: 'simulateGraph'
-				}
-			},
-			{
 				url: '/home',
 				config: {
 					title: 'Inicio',
 					templateUrl: 'app/home/home.view.html',
-					controller: 'homeController'
+					controller: 'homeCtrl'
 				}
 			},
 			{
@@ -52,7 +36,23 @@
 				config: {
 					title: 'Maquinas de estados',
 					templateUrl: 'app/machines/machines.list.view.html',
-					controller: 'machinesListController'
+					controller: 'machinesListCtrl'
+				}
+			},
+			{
+				url: '/machine/edit/:id',
+				config: {
+					title: 'Editar maquina',
+					templateUrl: 'app/machines/machines.edit.view.html',
+					controller: 'machinesEditCtrl'
+				}
+			},
+			{
+				url: '/machine/simulate/:id',
+				config: {
+					title: 'Simular maquina',
+					templateUrl: 'app/machines/machines.simulate.html',
+					controller: 'machineSimulateCtrl'
 				}
 			}
 	  	];

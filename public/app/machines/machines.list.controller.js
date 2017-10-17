@@ -1,14 +1,14 @@
 (function () {
 	'use strict';
 
-	var controllerName = 'machinesListController';
+	var controllerName = 'machinesListCtrl';
 
-	angular.module('app').controller(controllerName, ['$scope', '$location', 'dialogs', 'machinesService', 'toastr', machinesListController]);
+	angular.module('app').controller(controllerName, ['$scope', '$location', 'dialogs', 'machinesSrv', 'toastr', machinesListCtrl]);
 
 	/**
-	 * Controlador de la pantalla principal.
+	 * Controlador de la pantalla de listar automatas.
 	 */
-	function machinesListController($scope, $location, dialogs, machinesSrv, logger) {
+	function machinesListCtrl($scope, $location, dialogs, machinesSrv, logger) {
 
 		// busca todos los automatas disponibles.
 		machinesSrv.findAll().then(function (results) {
@@ -27,7 +27,7 @@
 
 		// elimina un automata.
 		$scope.remove = function (machine) {
-			var dlg = dialogs.confirm('¿Eliminar automata: ' + machine.name + '?');
+			var dlg = dialogs.confirm('¿Eliminar automata: ' + machine.name + '?', 'Una vez eliminado no podrá recuperarlo');
 
 			dlg.result.then(function () {
 				machinesSrv.destroy(machine._id).then(function (result) {

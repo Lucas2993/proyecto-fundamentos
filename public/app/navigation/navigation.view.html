@@ -1,26 +1,65 @@
+<div id="page-wrapper" ng-class="{'open': toggle}" ng-cloak data-ng-controller="navigationCtrl">
 
-<nav class="navbar navbar-default" ng-init="selectedTab = 'home'">
-	<div class="container-fluid">
-		<div class="navbar-header">
-			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-				<span class="sr-only">Toggle navigation</span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-			</button>
-			<a class="navbar-brand">
-				<img alt="Icon" src="favicon.png" height="100%" width="auto">
-			</a>
+	<!-- Sidebar -->
+	<div id="sidebar-wrapper">
+		<ul class="sidebar">
+			<li class="sidebar-main">
+				<a ng-click="toggleSidebar()">
+					Automatas
+					<span class="menu-icon glyphicon glyphicon-transfer"></span>
+				</a>
+			</li>
+			<li class="sidebar-title">
+				<span>NAVEGACIÓN</span>
+			</li>
+			<li class="sidebar-list">
+				<a data-ng-click="toHome()">Principal
+					<span class="menu-icon fa fa-home"></span>
+				</a>
+			</li>
+			<li class="sidebar-list">
+				<a data-ng-click="toMachines()">Automatas
+					<span class="menu-icon fa fa-list"></span>
+				</a>
+			</li>
+		</ul>
+
+		<div class="sidebar-footer">
+			<div class="col-xs-4">
+				<a href="https://github.com/LucasAbella29/proyecto-fundamentos" target="_blank">
+					Github
+				</a>
+			</div>
+
 		</div>
 
-		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-			<ul class="nav navbar-nav">
-				<li ng-class="{'active':selectedTab === 'home'}" ng-click="selectedTab = 'home'"><a href="#/home">
-					<span class="glyphicon glyphicon-home" aria-hidden="true"></span> Inicio</a></li>
-
-				<li ng-class="{'active':selectedTab === 'machines'}" ng-click="selectedTab = 'machines'"><a href="#/machines">
-					<span class="glyphicon glyphicon-cog" aria-hidden="true"></span> Maquinas</a></li>
-			</ul>
-		</div>
 	</div>
-</nav>
+	<!-- End Sidebar -->
+
+	<div id="content-wrapper">
+		<div class="page-content">
+
+			<!-- Header Bar -->
+			<div class="row header">
+				<div class="col-xs-12">
+
+					<div class="meta">
+						<div class="page">
+							Dashboard
+						</div>
+						<div class="breadcrumb-links">
+							Home / Dashboard
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- End Header Bar -->
+		</div>
+		<!-- End Page Content -->
+	</div>
+	<!-- End Content Wrapper -->
+
+	<!-- Main Content -->
+	<div data-ng-view=""></div>
+
+</div>

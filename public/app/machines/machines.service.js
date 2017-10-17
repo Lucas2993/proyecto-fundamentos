@@ -1,11 +1,11 @@
 (function() {
     'use strict';
 
-    var serviceName = 'machinesService';
+    var serviceName = 'machinesSrv';
 
-    angular.module('app').factory(serviceName, ['$http', machinesService]);
+    angular.module('app').factory(serviceName, ['$http', machinesSrv]);
 
-        function machinesService($http) {
+        function machinesSrv($http) {
 
             var service = {
                 findAll: findAll,
@@ -59,6 +59,10 @@
                     });
             }
 
+            /**
+             * Envia a persistir un nuevo automata.
+             * @param {Object} machine 
+             */
             function save(machine) {
                 return $http.post('api/machine/', {data: machine}).then(
                     function success(response) {
@@ -69,6 +73,11 @@
                     });
             }
 
+            /**
+             * Envia a actualizar un automata
+             * @param {Number} id 
+             * @param {Object} machine 
+             */
             function update(id, machine) {
                 return $http.post('api/machine/' + id, machine).then(
                     function success(response) {
@@ -79,6 +88,10 @@
                     });
             }
 
+            /**
+             * Envia a eliminar un automata.
+             * @param {Number} id 
+             */
             function destroy(id) {
                 return $http.delete('api/machine/' + id).then(
                     function success(response) {
