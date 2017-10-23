@@ -1,1 +1,48 @@
-asdasd
+<div class="row">
+    <!-- Canvas -->
+    <div style="width: 70%; height: 80%" class="col-md-8 col-md-offset-0">
+        <vis-network style="width: 100%; height: 100%" data="networkData" options="networkOptions" events="networkEvents" id="mynetwork">
+        </vis-network>
+    </div>
+
+    <div>
+        <div class="form-group">
+            <label>Estado actual:</label>
+            <br>
+            <input ng-model="currentState.label" typeahead-editable="false" uib-typeahead="node.label for node in machine.nodes | filter:$viewValue | limitTo:8"
+                placeholder="escriba el nombre">
+            <button class="btn btn-sm btn-primary" title="Elegir estado actual" data-ng-click="selectCurrent()" ng-disabled="disabled">
+                <i class="glyphicon glyphicon-ok"></i>&nbsp;Elegir
+            </button>
+
+            <button class="btn btn-sm btn-info" title="Resetea el estado actual" data-ng-click="resetCurrent()">
+                <i class="glyphicon glyphicon-repeat"></i>&nbsp;Reset
+            </button>
+        </div>
+
+        <rd-widget-body classes="medium no-padding">
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered">
+                    <tbody>
+                        <tr ng-repeat="edge in inputs">
+                            <th>{{$index+1}}</th>
+                            <td>{{edge}}</td>
+                            <td>
+                                <div class="text-center">
+                                    <div class="btn-group">
+                                        <button class="btn btn-success btn-sm center-block" uib-tooltip="Simular entrada" data-ng-disabled="!disabled" data-ng-click="execute(edge)">
+                                            &nbsp;
+                                            <span class="glyphicon glyphicon-play" aria-hidden="true"></span>&nbsp;
+                                        </button>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </rd-widget-body>
+
+    </div>
+</div>

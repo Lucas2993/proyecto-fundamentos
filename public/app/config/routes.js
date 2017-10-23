@@ -51,7 +51,7 @@
 				url: '/machine/simulate/:id',
 				config: {
 					title: 'Simular maquina',
-					templateUrl: 'app/machines/machines.simulate.html',
+					templateUrl: 'app/machines/machine.simulate.html',
 					controller: 'machineSimulateCtrl'
 				}
 			}

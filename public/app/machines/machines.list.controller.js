@@ -20,6 +20,11 @@
 			$location.path('/machine/edit/' + machine._id);
 		};
 
+		// redirecciona a simular automata.
+		$scope.simulate = function(machine) {
+			$location.path('/machine/simulate/' + machine._id);
+		};
+
 		// redirecciona a crear un nuevo automata.
 		$scope.create = function () {
 			$location.path('/machine/edit/new');

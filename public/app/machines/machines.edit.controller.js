@@ -33,10 +33,10 @@
 
         logger.success('Editor Activado');
 
-        // Redirecciona a la ultima pagina visitada.
-        $scope.back = function () {
-            $window.history.back();
-        }
+        // redirecciona a simular automata.
+        $scope.simulate = function (machine) {
+            $location.path('/machine/simulate/' + $scope.machine._id);
+        };
 
         // Persiste el automata creado/editado.
         $scope.save = function() {
@@ -117,7 +117,7 @@
         $scope.networkOptions = {
             edges: {
                 arrows: {
-                    to: true,
+                    to: true
                 }
             },
             nodes: {

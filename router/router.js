@@ -12,6 +12,7 @@ var router = express.Router();
  */
 router.get('/info', function(req, res) {
     var info = {version: "1.5", fecha: "october 2017"};
+	console.log('request');
     defaultCallback(res, null, info);    
 });
 

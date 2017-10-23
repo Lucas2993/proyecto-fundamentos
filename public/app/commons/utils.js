@@ -13,7 +13,8 @@
 
         // colores definidos para los tipos de nodos
         var colors = {
-            'start': '#9FF781'
+            'start': '#9FF781',
+            'error': '#FE2E2E'
         };
 
         /**
@@ -33,7 +34,7 @@
          * @return {Array} arreglo 
          */
         function objectToArray(obj) {
-            return Object.keys(obj).map(function (key) {
+            return Object.keys(obj).map(function(key) {
                 return obj[key];
             });
         }

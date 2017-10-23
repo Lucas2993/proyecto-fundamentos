@@ -29,6 +29,6 @@ app.set('host', appHost || "localhost");
 app.set('port', appPort || 8000);
 
 // aplicacion en escucha...
-app.listen(app.get('port'), function() {
+app.listen(app.get('port'), '127.0.0.1', function() {
     logger.info('[*] - Aplicación iniciada en %s:%s', app.get('host'), app.get('port'));
 });
