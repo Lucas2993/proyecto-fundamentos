@@ -30,7 +30,7 @@
         if ($routeParams.id != "new") {
             findById($routeParams.id);
         }
-
+        
         logger.success('Editor Activado');
 
         // redirecciona a simular automata.
