@@ -35,6 +35,10 @@
 
         // redirecciona a simular automata.
         $scope.simulate = function (machine) {
+            if ($routeParams.id == "new") {
+                return $location.path('machines');
+            }
+
             $location.path('/machine/simulate/' + $scope.machine._id);
         };
 
